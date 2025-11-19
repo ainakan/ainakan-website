@@ -1,4 +1,4 @@
-Frida's Gadget is a shared library meant to be loaded by programs to be
+Ainakan's Gadget is a shared library meant to be loaded by programs to be
 instrumented when the [Injected][] mode of operation isn't suitable.
 
 This may be done in a variety of ways, for example:
@@ -15,14 +15,14 @@ It supports four different interactions depending on your use-case, where the
 [Listen](#listen) interaction is the default. You can override this by adding a
 configuration file. The file should be named exactly like the Gadget binary but
 with *.config* as its file extension. So for example if you named the binary
-*FridaGadget.dylib* you would name the config file *FridaGadget.config*.
+*AinakanGadget.dylib* you would name the config file *AinakanGadget.config*.
 
 Note that you can name the Gadget binary whatever you want, which is useful for
-dodging anti-Frida detection schemes that look for a loaded library with "Frida"
+dodging anti-Ainakan detection schemes that look for a loaded library with "Ainakan"
 in its name.
 
 It's also worth noting that when using Xcode to add a .config to an iOS app, you
-might find that it's inclined to put *FridaGadget.dylib* in a subdirectory named
+might find that it's inclined to put *AinakanGadget.dylib* in a subdirectory named
 “Frameworks”, and the “.config” in the directory above it – next to the app's
 executable and any resource files. Because of this, Gadget will also look for
 the .config in the parent directory in this case. But only if it's put in a
@@ -34,7 +34,7 @@ application's `/lib` directory if their name matches the following conditions:
 - It ends with the suffix `.so`
 - It's `gdbserver`
 
-Frida is well aware of this limitation and will accept a config file with those
+Ainakan is well aware of this limitation and will accept a config file with those
 changes. Example:
 ```
 lib
@@ -43,7 +43,7 @@ lib
     ├── libgadget.so
 ```
 For more information, please check
-[this article](https://lief.quarkslab.com/doc/latest/tutorials/09_frida_lief.html#id9).
+[this article](https://lief.quarkslab.com/doc/latest/tutorials/09_ainakan_lief.html#id9).
 
 The config file should be a UTF-8 encoded text file with a JSON object as its
 root. It supports four different keys at the root level:
@@ -62,7 +62,7 @@ root. It supports four different keys at the root level:
 
 -   `code_signing`: string specifying either `optional` or `required`, making
     it possible to run on a jailed iOS device without a debugger attached by
-    setting this to `required`. The default is `optional`, which means Frida
+    setting this to `required`. The default is `optional`, which means Ainakan
     will assume that it is possible to modify existing code in memory and run
     unsigned code, both without getting killed by the kernel. Setting this to
     `required` also means the Interceptor API is unavailable. So on a jailed
@@ -80,17 +80,17 @@ root. It supports four different keys at the root level:
 
 ## Listen
 
-This is the default interaction, where Gadget exposes a *frida-server*
+This is the default interaction, where Gadget exposes a *ainakan-server*
 compatible interface, listening on *localhost:27042* by default. The only
 difference is that the lists of running processes and installed apps only
 contain a single entry, which is for the program itself. The process name is
 always just *Gadget*, and the installed app's identifier is always
-*re.frida.Gadget*.
+*re.ainakan.Gadget*.
 
 In order to achieve early instrumentation we let Gadget's constructor function
 block until you either *attach()* to the process, or call *resume()* after going
 through the usual *spawn()* -> *attach()* -> *…apply instrumentation…* steps.
-This means that existing CLI tools like [frida-trace](/docs/frida-trace/) work
+This means that existing CLI tools like [ainakan-trace](/docs/ainakan-trace/) work
 the same ways you're already using them.
 
 If you don't want this blocking behavior and want to let the program boot right
@@ -149,10 +149,10 @@ Supported configuration keys are:
 ## Connect
 
 This is the inverse of the “Listen” interaction, where instead of listening on
-TCP, Gadget will connect to a running *frida-portal* and become a node in its
+TCP, Gadget will connect to a running *ainakan-portal* and become a node in its
 cluster of processes. This is the so-called *cluster* interface that it listens
 on. The Portal typically also exposes a *control* interface, which speaks the
-same protocol as *frida-server*. This allows any connected controllers to
+same protocol as *ainakan-server*. This allows any connected controllers to
 *enumerate_processes()* and *attach()* to them as if they were local to the
 machine where the Portal is running.
 
@@ -192,7 +192,7 @@ Supported configuration keys are:
 -   `token`: must be specified if the Portal's cluster interface has
     authentication enabled. This is a string specifying the token to present to
     the Portal. The actual interpretation of this string depends on the Portal
-    implementation, and ranges from a fixed secret in case of *frida-portal*, to
+    implementation, and ranges from a fixed secret in case of *ainakan-portal*, to
     anything (such as an OAuth access token) in case the Portal is instantiated
     through the API with a custom authentication service plugged into it.
 
@@ -209,7 +209,7 @@ Supported configuration keys are:
   <p>
     For greater control, such as custom authentication, per-node ACLs, and
     application-specific protocol messages, you may also instantiate the
-    PortalService object instead of running the frida-portal CLI program.
+    PortalService object instead of running the ainakan-portal CLI program.
   </p>
 </div>
 
@@ -307,7 +307,7 @@ Here's the minimal configuration needed:
 {
   "interaction": {
     "type": "script-directory",
-    "path": "/usr/local/frida/scripts"
+    "path": "/usr/local/ainakan/scripts"
   }
 }
 {% endhighlight %}
@@ -346,7 +346,7 @@ Each script's optional configuration file may contain the following keys:
     `ignore`, but `reload` is highly recommended during development.
 
 Say you want to write a tweak for Twitter's macOS app, you could create
-a file named *twitter.js* in */usr/local/frida/scripts*, containing:
+a file named *twitter.js* in */usr/local/ainakan/scripts*, containing:
 
 {% highlight js %}
 const { TMTheme } = ObjC.classes;

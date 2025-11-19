@@ -1,4 +1,4 @@
-We show how to use Frida to inspect functions as they are called, modify their
+We show how to use Ainakan to inspect functions as they are called, modify their
 arguments, and do custom calls to functions inside a target process.
 
 ## Setting up the experiment
@@ -55,10 +55,10 @@ process and report back a function argument to you. Create a file `hook.py`
 containing:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("""
 Interceptor.attach(ptr("%s"), {
     onEnter(args) {
@@ -94,10 +94,10 @@ Next up: we want to modify the argument passed to a function inside a target
 process. Create the file `modify.py` with the following contents:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("""
 Interceptor.attach(ptr("%s"), {
     onEnter(args) {
@@ -133,14 +133,14 @@ Number: 1289
 
 ## Calling Functions
 
-We can use Frida to call functions inside a target process. Create the file
+We can use Ainakan to call functions inside a target process. Create the file
 `call.py` with the contents:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("""
 const f = new NativeFunction(ptr("%s"), 'void', ['int']);
 f(1911);
@@ -202,15 +202,15 @@ main (int argc,
 }
 {% endhighlight %}
 
-In a similar way to before, we can create a script `stringhook.py`, using Frida
+In a similar way to before, we can create a script `stringhook.py`, using Ainakan
 to inject a string into memory, and then call the function f() in the following
 way:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hi")
+session = ainakan.attach("hi")
 script = session.create_script("""
 const st = Memory.allocUtf8String("TESTMEPLZ!");
 const f = new NativeFunction(ptr("%s"), 'int', ['pointer']);
@@ -369,10 +369,10 @@ Here's a script to inject the malicious struct into memory, and then hijack the
 Create the file `struct_mod.py` as follows:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("client")
+session = ainakan.attach("client")
 script = session.create_script("""
 // First, let's give ourselves a bit of memory to put our struct in:
 send('Allocating memory and writing bytes...');
@@ -418,10 +418,10 @@ in the `client` terminal window, and netcat should now show the string sent
 by the client.
 
 We have successfully hijacked the raw networking by injecting our own data
-object into memory and hooking our process with Frida, and using `Interceptor`
+object into memory and hooking our process with Ainakan, and using `Interceptor`
 to do our dirty work in manipulating the function.
 
-This shows the real power of Frida - no patching, complicated reversing, nor
+This shows the real power of Ainakan - no patching, complicated reversing, nor
 difficult hours spent staring at dissassembly without end.
 
 Here's a quick video demonstrating the above:

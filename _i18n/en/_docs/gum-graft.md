@@ -22,5 +22,5 @@ Application Options:
 {% endhighlight %}
 
 
-[Gadget]: https://frida.re/docs/gadget/
-[releases page]: https://github.com/frida/frida/releases
+[Gadget]: https://ainakan.re/docs/gadget/
+[releases page]: https://github.com/ainakan/ainakan/releases

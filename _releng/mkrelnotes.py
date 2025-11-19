@@ -30,18 +30,18 @@ class Author:
 def main():
     repo_root = Path(__file__).resolve().parent.parent
     posts_dir = repo_root / "_i18n" / "en" / "_posts"
-    frida_repo = Path(sys.argv[1])
+    ainakan_repo = Path(sys.argv[1])
     tag = sys.argv[2]
 
-    summary = extract_release_metadata(frida_repo, tag)
-    example_note = (posts_dir / "2024-10-14-frida-16-5-6.markdown").read_text(
+    summary = extract_release_metadata(ainakan_repo, tag)
+    example_note = (posts_dir / "2024-10-14-ainakan-16-5-6.markdown").read_text(
         encoding="utf-8"
     )
     notes = generate_release_notes(summary, example_note, OpenAI())
 
     short_date = summary["date"].split(" ")[0]
     dashed_tag = tag.replace(".", "-")
-    post_file = posts_dir / f"{short_date}-frida-{dashed_tag}-released.markdown"
+    post_file = posts_dir / f"{short_date}-ainakan-{dashed_tag}-released.markdown"
     post_file.write_text(notes, encoding="utf-8")
 
 
@@ -49,7 +49,7 @@ def generate_release_notes(summary: dict, example_note: str, client) -> str:
     prompt = "\n".join(
         [
             (
-                "You are the maintainer of an open source project called Frida. "
+                "You are the maintainer of an open source project called Ainakan. "
                 "One of your earlier release notes looked like this:"
             ),
             "```",
@@ -157,7 +157,7 @@ def fetch_commits_from_github(
 ) -> list[Commit]:
     token = os.environ["GH_TOKEN"]
 
-    url = f"https://api.github.com/repos/frida/{repo_name}/compare/{old_commit}...{new_commit}"
+    url = f"https://api.github.com/repos/ainakan/{repo_name}/compare/{old_commit}...{new_commit}"
     headers = {
         "Authorization": f"Bearer {token}",
         "X-GitHub-Api-Version": "2022-11-28",
@@ -193,7 +193,7 @@ def get_submodule_commits(repo: Path, tag1: str, tag2: str) -> list[Commit]:
 
             submodule_path = parts[1]
             submodule_repo = repo / submodule_path
-            if submodule_repo.name in {"capstone", "frida-tools", "meson", "udis86"}:
+            if submodule_repo.name in {"capstone", "ainakan-tools", "meson", "udis86"}:
                 continue
 
             raw_commit_range = parts[2][:-1]

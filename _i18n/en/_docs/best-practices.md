@@ -1,5 +1,5 @@
 This section is meant to contain best practices and pitfalls commonly
-encountered when using Frida.
+encountered when using Ainakan.
 
 ### String allocation (UTF-8/UTF-16/ANSI)
 
@@ -74,7 +74,7 @@ Interceptor.attach(f, {
 {% endhighlight %}
 
 In the above example the first argument is obtained from the *args* array twice,
-and this is paying the cost of querying *frida-gum* for this information twice.
+and this is paying the cost of querying *ainakan-gum* for this information twice.
 To avoid wasting precious CPU cycles when needing the same argument multiple
 times, it is best to store this information using a local variable:
 

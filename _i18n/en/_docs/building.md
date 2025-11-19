@@ -1,13 +1,13 @@
 ## Table of contents
 
-1. Building Frida
+1. Building Ainakan
  - [Prerequisites](#prerequisites)
  - [Getting the code](#clone)
  - [Building for the native machine](#native)
  - [Building for a different machine](#cross)
  - [Building out-of-tree](#oot)
 
-## Building Frida
+## Building Ainakan
 
 ### Prerequisites
 
@@ -27,7 +27,7 @@ $ sudo apt-get install build-essential git lib32stdc++-9-dev \
 ### Getting the code
 
 {% highlight bash %}
-$ git clone https://github.com/frida/frida.git
+$ git clone https://github.com/ainakan/ainakan.git
 {% endhighlight %}
 
 ### Building for the native machine
@@ -54,8 +54,8 @@ means you can also pass project options to subprojects, e.g.:
 
 {% highlight bash %}
 $ ./configure -- \
-    -Dfrida-gum:devkits=gum,gumjs \
-    -Dfrida-core:devkits=core
+    -Dainakan-gum:devkits=gum,gumjs \
+    -Dainakan-core:devkits=core
 {% endhighlight %}
 
 Consult `meson.options` in subprojects/* for available options. You may also
@@ -96,10 +96,10 @@ directory outside the source tree:
 
 {% highlight bash %}
 $ mkdir build-ios
-$ ../frida/configure --host=ios-arm64
+$ ../ainakan/configure --host=ios-arm64
 $ make
 $ cd ..
 $ mkdir build-android
-$ ../frida/configure --host=android-arm64
+$ ../ainakan/configure --host=android-arm64
 $ make
 {% endhighlight %}

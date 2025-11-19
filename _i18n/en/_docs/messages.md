@@ -55,10 +55,10 @@ You can send any JavaScript value which is serializable to JSON.
 Create a file `send.py` containing:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("send(1337);")
 def on_message(message, data):
     print(message)
@@ -101,10 +101,10 @@ It is possible to send messages from the Python script to the JavaScript
 script. Create the file `pingpong.py`:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("""
     recv('poke', function onMessage(pokeMessage) { send('pokeBack'); });
 """)
@@ -143,10 +143,10 @@ It is possible to wait for a message to arrive (a blocking receive) inside your
 JavaScript script. Create a script `rpc.py`:
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
-session = frida.attach("hello")
+session = ainakan.attach("hello")
 script = session.create_script("""
 Interceptor.attach(ptr("%s"), {
     onEnter(args) {

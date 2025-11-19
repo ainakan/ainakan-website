@@ -8,23 +8,23 @@
 ## Porting
 
 The first step is setting up the build system. Let's assume you're about
-to port Frida to run on Linux/MIPS. As Frida already supports Linux, all
+to port Ainakan to run on Linux/MIPS. As Ainakan already supports Linux, all
 we need to do is add the architecture-specific bits.
 
 ### Porting the build system
 
 Depending on the architecture, you may need to tweak `releng/machine_spec.py`.
-Review the generated machine file in `build/`, e.g. build/frida-linux-mips.txt,
+Review the generated machine file in `build/`, e.g. build/ainakan-linux-mips.txt,
 to make sure the toolchain is configured correctly.
 
-### Building frida-gum
+### Building ainakan-gum
 
 This is the lowest level component and where most of the porting effort is
 typically needed. To build it, run:
 
 {% highlight bash %}
-$ git clone https://github.com/frida/frida-gum.git
-$ cd frida-gum
+$ git clone https://github.com/ainakan/ainakan-gum.git
+$ cd ainakan-gum
 $ make
 {% endhighlight %}
 
@@ -39,25 +39,25 @@ $ make test
 You can also run a single test, e.g.
 
 {% highlight bash %}
-$ FRIDA_TEST_OPTIONS="--test-args='-p /Core/Process/process_modules' -v" make test
+$ AINAKAN_TEST_OPTIONS="--test-args='-p /Core/Process/process_modules' -v" make test
 {% endhighlight %}
 
-### Porting frida-gum
+### Porting ainakan-gum
 
 Add the directory *gum/backend-mips* by duplicating for example
-[gum/backend-arm64](https://github.com/frida/frida-gum/tree/main/gum/backend-arm64),
+[gum/backend-arm64](https://github.com/ainakan/ainakan-gum/tree/main/gum/backend-arm64),
 and then search-replace everything. The important part to port here is
 *guminterceptor-mips.c* and *gumspinlock-mips.c*. You should leave
 *gumstalker-mips.c* as a stub, as it's an advanced feature that takes a lot
 of effort to port.
 
-### Building frida-core
+### Building ainakan-core
 
-Now that frida-gum works, it's time to repeat the same process for frida-core.
+Now that ainakan-gum works, it's time to repeat the same process for ainakan-core.
 
-### Porting frida-core
+### Porting ainakan-core
 
-This should only be a matter of porting the injector. The implementation is [here](https://github.com/frida/frida-core/blob/main/src/linux/frida-helper-backend.vala)
+This should only be a matter of porting the injector. The implementation is [here](https://github.com/ainakan/ainakan-core/blob/main/src/linux/ainakan-helper-backend.vala)
 and the recommended approach is to follow the `#if X86` breadcrumbs to port
 the architecture-specific bits. For a walkthrough of the Linux injector, check
 out our presentation [here](https://www.youtube.com/watch?v=uc1mbN9EJKQ).

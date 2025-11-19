@@ -7,7 +7,7 @@ download the APK [here](https://github.com/ctfs/write-ups-2015/tree/master/secco
 Save code as *ctf.py* and run as `python ctf.py`.
 
 {% highlight py %}
-import frida, sys
+import ainakan, sys
 
 def on_message(message, data):
     if message['type'] == 'send':
@@ -40,7 +40,7 @@ Java.perform(() => {
 });
 """
 
-process = frida.get_usb_device().attach('com.example.seccon2015.rock_paper_scissors')
+process = ainakan.get_usb_device().attach('com.example.seccon2015.rock_paper_scissors')
 script = process.create_script(jscode)
 script.on('message', on_message)
 print('[*] Running CTF')
@@ -57,7 +57,7 @@ values those fields refer to.
 
 ## Example of what we can do using the Java bridge
 
-Some possibilities with the Java bridge in Frida:
+Some possibilities with the Java bridge in Ainakan:
 
 {% highlight js %}
 Java.perform(() => {

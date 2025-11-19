@@ -5,8 +5,8 @@ excerpt_separator: ""
 
 google_analytics_id: UA-46880695-1
 
-organization_url: https://github.com/frida
-repository: https://github.com/frida/frida
+organization_url: https://github.com/ainakan
+repository: https://github.com/ainakan/ainakan
 
 timezone: Europe/Oslo
 
@@ -14,12 +14,12 @@ collections:
   docs:
     output: true
 
-name: Frida • A world-class dynamic instrumentation toolkit
+name: Ainakan • A world-class dynamic instrumentation toolkit
 description: Observe and reprogram running programs on Windows, macOS, GNU/Linux, iOS, watchOS, tvOS, Android, FreeBSD, and QNX
-url: https://frida.re
+url: https://ainakan.re
 
 twitter:
-  username: fridadotre
+  username: ainakandotre
 
 languages: ["en", "ja"]
 

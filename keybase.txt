@@ -4,7 +4,7 @@ https://keybase.io/oleavr
 
 I hereby claim:
 
-  * I am an admin of http://www.frida.re
+  * I am an admin of http://www.ainakan.re
   * I am oleavr (https://keybase.io/oleavr) on keybase.
   * I have a public key with fingerprint 8831 9572 8E5A 6FA7 C4DE  2ADC D7F0 D062 8F33 186D
 
@@ -22,7 +22,7 @@ To do so, I am signing this object:
             "username": "oleavr"
         },
         "service": {
-            "hostname": "www.frida.re",
+            "hostname": "www.ainakan.re",
             "protocol": "http:"
         },
         "type": "web_service_binding",

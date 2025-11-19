@@ -1,7 +1,7 @@
 ## Example tool for directly monitoring a jvm.dll
 
 Shows how to monitor a jvm.dll which is being executed by a process called
-*fledge.exe* (BB Simulator) using Frida.
+*fledge.exe* (BB Simulator) using Ainakan.
 
 Save this code as *bb.py*, run BB Simulator (fledge.exe), then run
 `python.exe bb.py fledge.exe` for monitoring
@@ -9,14 +9,14 @@ Save this code as *bb.py*, run BB Simulator (fledge.exe), then run
 *jvm.dll*.
 
 {% highlight py %}
-import frida
+import ainakan
 import sys
 
 def on_message(message, data):
     print("[%s] => %s" % (message, data))
 
 def main(target_process):
-    session = frida.attach(target_process)
+    session = ainakan.attach(target_process)
 
     script = session.create_script("""
 

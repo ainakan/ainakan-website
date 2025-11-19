@@ -4,8 +4,8 @@ import re
 import subprocess
 
 
-PUBLIC_URL = "https://frida.re"
-BUCKET_URI = "s3://frida.re"
+PUBLIC_URL = "https://ainakan.re"
+BUCKET_URI = "s3://ainakan.re"
 MAX_PURGES_PER_REQUEST = 30
 
 UPLOAD_PATTERN = re.compile(r"^upload: .+ to (s3:\/\/\S+)", re.MULTILINE)

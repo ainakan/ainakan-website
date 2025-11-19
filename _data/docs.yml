@@ -27,12 +27,12 @@
 
 - title: Tools
   docs:
-  - frida-cli
-  - frida-ps
-  - frida-trace
-  - frida-discover
-  - frida-ls-devices
-  - frida-kill
+  - ainakan-cli
+  - ainakan-ps
+  - ainakan-trace
+  - ainakan-discover
+  - ainakan-ls-devices
+  - ainakan-kill
   - gum-graft
 
 - title: API Reference

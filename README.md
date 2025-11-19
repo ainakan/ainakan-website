@@ -1,6 +1,6 @@
-## Frida's Website
+## Ainakan's Website
 
-Live at [frida.re](https://frida.re/).
+Live at [ainakan.re](https://ainakan.re/).
 
 ### Development
 

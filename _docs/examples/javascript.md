@@ -67,7 +67,7 @@ function run(source) {
   uv_async_send(handle);
 }
 
-run('console.log("Hello from Frida");');
+run('console.log("Hello from Ainakan");');
 {% endhighlight %}
 
 ## Trace function calls in a Perl 5 process

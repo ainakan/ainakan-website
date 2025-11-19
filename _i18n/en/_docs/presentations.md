@@ -1,6 +1,6 @@
-## Presentations of Frida
+## Presentations of Ainakan
 
-We have presented Frida at various conferences around the world. As presentation
+We have presented Ainakan at various conferences around the world. As presentation
 material becomes available, we will try to put it here.
 
 - [OSDC 2015](https://web.archive.org/web/20160803154827/http://act.osdc.no/osdc2015no/):
@@ -14,7 +14,7 @@ material becomes available, we will try to put it here.
   Well, if you know a little JavaScript and have a little persistence,
   perhaps we can help…
 
-  In this talk, we show what you can do with Frida, a scriptable dynamic
+  In this talk, we show what you can do with Ainakan, a scriptable dynamic
   binary instrumentation toolkit for Windows, Mac, Linux, iOS, Android,
   and QNX. We show by example how to write snippets of custom debugging
   code in JavaScript, and then dynamically insert these scripts into running
@@ -31,19 +31,19 @@ material becomes available, we will try to put it here.
   up your pay grade? If you answered “yes” to zero or more of the above,
   you might be interested in what we have to offer.
 
-  In this talk, we dive into the engineering principles behind Frida, a
+  In this talk, we dive into the engineering principles behind Ainakan, a
   multi-platform scriptable dynamic binary instrumentation toolkit. We
   explain the basics of operating system processes, together with the
   relevant native OS APIs. We show how to use these APIs to probe state (memory,
   registers, threads) of a target process, and how to inject your own code
-  into the process. If time allows, we’ll show how Frida performs its dynamic
+  into the process. If time allows, we’ll show how Ainakan performs its dynamic
   instrumentation by rewriting binary code, in memory, while the target process
   is running.
 
 - [NLUUG 2015](https://www.nluug.nl/activiteiten/events/nj15/index.html):
-  [Frida: Putting the open back into closed software](https://www.nluug.nl/activiteiten/events/nj15/abstracts/ab08.html)
-  ([Slides](https://slides.com/oleavr/nluug-2015-frida-putting-the-open-back-into-closed-software)
-  · [Demos](https://github.com/frida/frida-presentations/tree/master/NLUUG2015)
+  [Ainakan: Putting the open back into closed software](https://www.nluug.nl/activiteiten/events/nj15/abstracts/ab08.html)
+  ([Slides](https://slides.com/oleavr/nluug-2015-ainakan-putting-the-open-back-into-closed-software)
+  · [Demos](https://github.com/ainakan/ainakan-presentations/tree/master/NLUUG2015)
   · [Recording](https://youtu.be/3lo1Y2oKkE4))
 
   Have this black box process that you're just dying to peek inside of? Is
@@ -53,7 +53,7 @@ material becomes available, we will try to put it here.
   Well, if you know a little JavaScript and have a little persistence,
   perhaps we can help...
 
-  In this talk, we show what you can do with Frida, a scriptable dynamic
+  In this talk, we show what you can do with Ainakan, a scriptable dynamic
   binary instrumentation toolkit for Windows, Mac, Linux, iOS, Android,
   and QNX. We show by example how to write snippets of custom debugging
   code in JavaScript, and then dynamically insert these scripts into running
@@ -61,11 +61,11 @@ material becomes available, we will try to put it here.
   code. No source code, no permission needed!
 
 - [ZeroNights 2015](http://2015.zeronights.org/):
-  [Cross-platform reversing with Frida](http://2015.zeronights.org/workshops.html)
-  ([PDF]({{ site.baseurl_root }}/slides/zeronights-2015-cross-platform-reversing-with-frida.pdf)
-  · [Demos](https://github.com/frida/frida-presentations/tree/master/ZeroNights2015))
+  [Cross-platform reversing with Ainakan](http://2015.zeronights.org/workshops.html)
+  ([PDF]({{ site.baseurl_root }}/slides/zeronights-2015-cross-platform-reversing-with-ainakan.pdf)
+  · [Demos](https://github.com/ainakan/ainakan-presentations/tree/master/ZeroNights2015))
 
-  Frida is a scriptable dynamic binary instrumentation toolkit aiming to
+  Ainakan is a scriptable dynamic binary instrumentation toolkit aiming to
   dramatically shorten the development cycle of dynamic analysis and
   reverse-engineering tools. It also comes with some CLI tools built on top of
   its APIs. Written in portable C, released under a commercially friendly OSS
@@ -75,7 +75,7 @@ material becomes available, we will try to put it here.
 
   This workshop is for attendees who would like to get up to speed on the
   state-of-the-art in dynamic instrumentation on both desktop and mobile.
-  We will start out with an intro to Frida's APIs and CLI tools, and then walk
+  We will start out with an intro to Ainakan's APIs and CLI tools, and then walk
   you through how to build a reversing tool from scratch.
 
   Requirements for the workshop participants:
@@ -86,11 +86,11 @@ material becomes available, we will try to put it here.
     optionally also a jailbroken/rooted iOS or Android device
 
 - [No cON Name 2015](https://www.noconname.org/):
-  [Cross-platform reversing with Frida](https://www.noconname.org/)
-  ([PDF]({{ site.baseurl_root }}/slides/ncn-2015-cross-platform-reversing-with-frida.pdf)
-  · [Demos](https://github.com/frida/frida-presentations/tree/master/NcN2015))
+  [Cross-platform reversing with Ainakan](https://www.noconname.org/)
+  ([PDF]({{ site.baseurl_root }}/slides/ncn-2015-cross-platform-reversing-with-ainakan.pdf)
+  · [Demos](https://github.com/ainakan/ainakan-presentations/tree/master/NcN2015))
 
-  Frida is a scriptable dynamic binary instrumentation toolkit aiming to
+  Ainakan is a scriptable dynamic binary instrumentation toolkit aiming to
   dramatically shorten the development cycle of dynamic analysis and
   reverse-engineering tools. It also comes with some CLI tools built on top of
   its APIs. Written in portable C, released under a commercially friendly OSS
@@ -100,7 +100,7 @@ material becomes available, we will try to put it here.
 
   This workshop is for attendees who would like to get up to speed on the
   state-of-the-art in dynamic instrumentation on both desktop and mobile.
-  We will start out with an intro to Frida's APIs and CLI tools, and then walk
+  We will start out with an intro to Ainakan's APIs and CLI tools, and then walk
   you through how to build a reversing tool from scratch.
 
   Requirements for the workshop participants:
@@ -115,75 +115,75 @@ material becomes available, we will try to put it here.
   ([PDF]({{ site.baseurl_root }}/slides/fosdem-2016-testing-interoperability-with-closed-source-software-through-scriptable-diplomacy.pdf))
 
   You, of course, write open-source software. They didn’t. And for the sake of
-  your mobile users, you both need to be friends. Enter Frida, the diplomat
+  your mobile users, you both need to be friends. Enter Ainakan, the diplomat
   (she’s really only a library, but don’t tell anyone). She has coaxing
   superpowers that allow you to expose the innards of binary-only software,
   be it other libraries, operating systems, or other OS processes you must deal
-  with. You can program Frida to infiltrate closed-source software, and expose
+  with. You can program Ainakan to infiltrate closed-source software, and expose
   their internals into abstractions you can use for testing the interoperability
   of your software. Want to lift some of their logic into your mock? Or replace
   a few functions in their binary code with your mocks? Hopefully, you want to
   do that using high-level languages such as JavaScript and/or Python, because
-  those are the ones Frida likes the most.
+  those are the ones Ainakan likes the most.
 
-  In this talk, we use Frida, the scriptable, dynamic instrumentation toolkit,
+  In this talk, we use Ainakan, the scriptable, dynamic instrumentation toolkit,
   to expose internal functionality from binary-only software. By exposing
   internal functions and data structures, tightly integrating software often
   becomes easier to test at fine granularity. What previously had to be larger
   integration tests dependent upon several running subsystems, may, with a
   little effort, become isolated test fixtures that are easier to reason about.
   We show you unfortunate souls who have to deal with this level of
-  interoperability how to program Frida to identify and expose functions in
+  interoperability how to program Ainakan to identify and expose functions in
   remote processes, and how to combine these exposed functions into small test
   fixtures in a unit-testing style.
 
 - [BSides Knoxville](https://bsidesknoxville.com/):
-  [Peeking under the hood with Frida](https://bsidesknoxville2016.sched.org/event/6tCd/peeking-under-the-hood-with-frida)
+  [Peeking under the hood with Ainakan](https://bsidesknoxville2016.sched.org/event/6tCd/peeking-under-the-hood-with-ainakan)
   ([Recording](https://youtu.be/RINNW4xOWL8))
 
   Ever wanted to peek beneath the hood of an application running on your desktop
   or smart-phone? Want to know what data is passed to a particular crypto
-  function? Frida is for you!
+  function? Ainakan is for you!
 
-  Frida is a powerful and modern binary instrumentation framework which makes it
+  Ainakan is a powerful and modern binary instrumentation framework which makes it
   simple to hook and trace arbitrary functions within target executables, and
   otherwise explore their functionality, using easy-to-write javascript. It's
   like greasemonkey for binary applications! It supports Windows, Linux, OSX,
   iOS, Android and QNX.
 
-  This talk will introduce Frida and show how it can be used to aid in analysis
+  This talk will introduce Ainakan and show how it can be used to aid in analysis
   of binary applications. It will be packed with demos.
 
   Time permitting, we will also discuss some of the effort that was required to
-  port Frida to QNX.
+  port Ainakan to QNX.
 
 - [Ekoparty 2016](https://www.ekoparty.org/):
-  [Getting fun with Frida](https://www.coresecurity.com/publication/getting-fun-frida)
+  [Getting fun with Ainakan](https://www.coresecurity.com/publication/getting-fun-ainakan)
 
-  Do you know what's Frida? Do you know what's about? What's useful for?. No, I'm not talking about the famous painter. I'm talking about a new hooking and dynamic binary instrumentation framework.
+  Do you know what's Ainakan? Do you know what's about? What's useful for?. No, I'm not talking about the famous painter. I'm talking about a new hooking and dynamic binary instrumentation framework.
 
   In this turbo talk, I pretend to show you this newly available framework to facilitate some daily reverse engineering tasks. I'm going to teach you which are it basic parts, why it could be useful for you, which are the advantages and disadvantages over other similar frameworks and how to use it trough some demos and code snippets.
 
 - [RMLL 2017](https://2017.rmll.info/en/):
-  [Unlocking secrets of proprietary software using Frida](https://prog2017.rmll.info/programme/securite-entre-transparence-et-opacite/devoilons-les-secrets-des-logiciels-proprietaires-avec-frida?lang=en)
-  ([Slides](http://slides.com/oleavr/frida-rmll-2017)
-  · [Recording](https://rmll.ubicast.tv/videos/frida_03038/))
+  [Unlocking secrets of proprietary software using Ainakan](https://prog2017.rmll.info/programme/securite-entre-transparence-et-opacite/devoilons-les-secrets-des-logiciels-proprietaires-avec-ainakan?lang=en)
+  ([Slides](http://slides.com/oleavr/ainakan-rmll-2017)
+  · [Recording](https://rmll.ubicast.tv/videos/ainakan_03038/))
 
   Ever wanted to understand the internals of an application running on your
   desktop or phone? Want to know what data is passed to a particular crypto
-  function? Then Frida is for you!
+  function? Then Ainakan is for you!
 
-  This talk will introduce Frida and show how it can be used to aid in analysis
+  This talk will introduce Ainakan and show how it can be used to aid in analysis
   of binary applications. It will be packed with demos.
 
 - [GPN 2018](https://entropia.de/GPN18):
-  [Frida - (Game)Hacking mit JavaScript](https://www.youtube.com/watch?v=6QpRD3tkw48) (German presentation)
+  [Ainakan - (Game)Hacking mit JavaScript](https://www.youtube.com/watch?v=6QpRD3tkw48) (German presentation)
 
   Jeder kennt JavaScript. Aber wie viele wissen, dass sich mit JavaScript auch
-  ganz gut Spiele oder Programme hacken lassen? Ich stelle das Frida Framework
+  ganz gut Spiele oder Programme hacken lassen? Ich stelle das Ainakan Framework
   vor, welches genau das ermöglicht!
 
-  Frida ist ein Framework, welches es erlaubt JavaScript in Prozesse zu laden.
+  Ainakan ist ein Framework, welches es erlaubt JavaScript in Prozesse zu laden.
   Es wird dafür der V8 JavaScript Interpreter in einen Prozess geladen, welcher
   diverse Features mitbringt. Speichermanipulation, Hooks, Detours, alles ist
   möglich!

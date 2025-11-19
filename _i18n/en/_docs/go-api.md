@@ -1,4 +1,4 @@
-The Go bindings make it easy to use Frida's APIs from [Go][].
+The Go bindings make it easy to use Ainakan's APIs from [Go][].
 
 Some of the provided functionality includes:
 
@@ -16,17 +16,17 @@ package main
 import (
 	"fmt"
 
-	"github.com/frida/frida-go/frida"
+	"github.com/ainakan/ainakan-go/ainakan"
 )
 
 func main() {
-	manager := frida.NewDeviceManager()
+	manager := ainakan.NewDeviceManager()
 	devices, err := manager.EnumerateDevices()
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Printf("[*] Frida version: %s\n", frida.Version())
+	fmt.Printf("[*] Ainakan version: %s\n", ainakan.Version())
 	fmt.Println("[*] Devices: ")
 	for _, device := range devices {
 		fmt.Printf("[*] %s => %s\n", device.Name(), device.ID())
@@ -38,7 +38,7 @@ Example above should output something like:
 
 {% highlight bash %}
 $ go build main.go && ./main
-[*] Frida version: 16.0.3
+[*] Ainakan version: 16.0.3
 [*] Devices:
 [*] Local System => local
 [*] Local Socket => socket
@@ -46,4 +46,4 @@ $ go build main.go && ./main
 
 
 [Go]: https://go.dev/
-[pkg.go.dev]: https://pkg.go.dev/github.com/frida/frida-go/frida
+[pkg.go.dev]: https://pkg.go.dev/github.com/ainakan/ainakan-go/ainakan

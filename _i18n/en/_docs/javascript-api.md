@@ -6,14 +6,14 @@ refactoring tools, etc.
 
 Here's a short teaser video showing the editor experience:
 
-[![Frida TypeScript demo](https://i.ytimg.com/vi/9cr4gOPFN4o/sddefault.jpg)](https://youtu.be/9cr4gOPFN4o)
+[![Ainakan TypeScript demo](https://i.ytimg.com/vi/9cr4gOPFN4o/sddefault.jpg)](https://youtu.be/9cr4gOPFN4o)
 
-Clone **[this repo](https://github.com/oleavr/frida-agent-example)** to get started.
+Clone **[this repo](https://github.com/oleavr/ainakan-agent-example)** to get started.
 
 ## Table of contents
 
 1. **Runtime information**
-    1. [Frida](#frida)
+    1. [Ainakan](#ainakan)
     1. [Script](#script)
 1. **Process, Thread, Module and Memory**
     1. [Thread](#thread)
@@ -94,12 +94,12 @@ Clone **[this repo](https://github.com/oleavr/frida-agent-example)** to get star
 
 ## Runtime information
 
-### Frida
+### Ainakan
 
-+   `Frida.version`: property containing the current Frida version, as a string.
++   `Ainakan.version`: property containing the current Ainakan version, as a string.
 
-+   `Frida.heapSize`: dynamic property containing the current size of Frida's
-    private heap, shared by all scripts and Frida's own runtime. This is useful
++   `Ainakan.heapSize`: dynamic property containing the current size of Ainakan's
+    private heap, shared by all scripts and Ainakan's own runtime. This is useful
     for keeping an eye on how much memory your instrumentation is using out of
     the total consumed by the hosting process.
 
@@ -136,7 +136,7 @@ Clone **[this repo](https://github.com/oleavr/frida-agent-example)** to get star
     and subsequently imported by other modules. The parent script may also
     export values that can be imported from the loaded child script. This
     requires that the parent uses the new ES module bundle format used by newer
-    versions of frida-compile.
+    versions of ainakan-compile.
 
     Returns a *Promise* that resolves to the module's namespace object.
 
@@ -209,7 +209,7 @@ Clone **[this repo](https://github.com/oleavr/frida-agent-example)** to get star
     {: #process-pointersize}
 
 +   `Process.codeSigningPolicy`: property containing the string `optional` or
-    `required`, where the latter means Frida will avoid modifying existing code
+    `required`, where the latter means Ainakan will avoid modifying existing code
     in memory and will not try to run unsigned code. Currently this property
     will always be set to `optional` unless you are using **[Gadget](/docs/gadget)**
     and have configured it to assume that code-signing is required. This
@@ -374,8 +374,8 @@ Clone **[this repo](https://github.com/oleavr/frida-agent-example)** to get star
     log the issue, notify your application through a **[send()](#communication-send)**
     followed by a blocking recv() for acknowledgement of the sent data being received,
     or it can modify registers and memory to recover from the exception. You should
-    return `true` if you did handle the exception, in which case Frida will
-    resume the thread immediately. If you do not return `true`, Frida will
+    return `true` if you did handle the exception, in which case Ainakan will
+    resume the thread immediately. If you do not return `true`, Ainakan will
     forward the exception to the hosting process' exception handler, if it has
     one, or let the OS terminate the process.
 
@@ -454,7 +454,7 @@ Objects returned by e.g.
     order to guess the return addresses, which means you will get false
     positives, but it will work on any binary. The generated backtrace is
     currently limited to 16 frames and is not adjustable without recompiling
-    Frida.
+    Ainakan.
 
 {% highlight js %}
 const commonCrypto = Process.getModuleByName('libcommonCrypto.dylib');
@@ -868,9 +868,9 @@ Memory.patchCode(getLivesLeft, maxPatchSize, code => {
 
 +   `builtins`: an object specifying builtins present when constructing a
     CModule from C source code. This is typically used by a scaffolding tool
-    such as `frida-create` in order to set up a build environment that matches
+    such as `ainakan-create` in order to set up a build environment that matches
     what CModule uses. The exact contents depends on the
-    [`Process.arch`](#process-arch) and Frida version, but may look something
+    [`Process.arch`](#process-arch) and Ainakan version, but may look something
     like the following:
 
         {
@@ -917,20 +917,20 @@ const hello = new NativeFunction(cm.hello, 'void', []);
 hello();
 {% endhighlight %}
 
-Which you might load using Frida's REPL:
+Which you might load using Ainakan's REPL:
 
 {% highlight sh %}
-$ frida -p 0 -l example.js
+$ ainakan -p 0 -l example.js
 {% endhighlight %}
 
 (The REPL monitors the file on disk and reloads the script on change.)
 
 You can then type `hello()` in the REPL to call the C function.
 
-For prototyping we recommend using the Frida REPL's built-in CModule support:
+For prototyping we recommend using the Ainakan REPL's built-in CModule support:
 
 {% highlight sh %}
-$ frida -p 0 -C example.c
+$ ainakan -p 0 -C example.c
 {% endhighlight %}
 
 You may also add `-l example.js` to load some JavaScript next to it.
@@ -944,8 +944,8 @@ Here's an example:
 
 ![CModule REPL example](https://pbs.twimg.com/media/EEyxQzwXoAAqoAw?format=jpg&name=small)
 
-More details on CModule can be found in the **[Frida 12.7 release notes]({{
-site.baseurl_root }}/news/2019/09/18/frida-12-7-released/)**.
+More details on CModule can be found in the **[Ainakan 12.7 release notes]({{
+site.baseurl_root }}/news/2019/09/18/ainakan-12-7-released/)**.
 
 
 ### RustModule
@@ -1347,7 +1347,7 @@ Kernel.protect(UInt64('0x1234'), 4096, 'rw-');
 
 -   `readByteArray(length)`: reads `length` bytes from this memory location, and
     returns it as an **[ArrayBuffer](#arraybuffer)**. This buffer may be efficiently
-    transferred to your Frida-based application by passing it as the second argument
+    transferred to your Ainakan-based application by passing it as the second argument
     to [`send()`](#communication-send).
     {: #nativepointer-readbytearray}
 
@@ -1498,7 +1498,7 @@ Kernel.protect(UInt64('0x1234'), 4096, 'rw-');
                        This is faster but may result in deadlocks.
     -   `exceptions`: exception behavior as a string. Supported values are:
         -   steal: If the called function generates a native exception, e.g.
-                   by dereferencing an invalid pointer, Frida will unwind the
+                   by dereferencing an invalid pointer, Ainakan will unwind the
                    stack and steal the exception, turning it into a JavaScript
                    exception that can be handled. This may leave the application
                    in an undefined state, but is useful to avoid crashing the
@@ -1891,8 +1891,8 @@ smt.reset();
     at `target`. This is a [`NativePointer`](#nativepointer) specifying the address
     of the function you would like to intercept calls to. Note that on 32-bit ARM this
     address must have its least significant bit set to 0 for ARM functions, and
-    1 for Thumb functions. Frida takes care of this detail for you if you get
-    the address from a Frida API (for example [`Module#getExportByName()`](#module-getexportbyname)).
+    1 for Thumb functions. Ainakan takes care of this detail for you if you get
+    the address from a Ainakan API (for example [`Module#getExportByName()`](#module-getexportbyname)).
     {: #interceptor-attach}
 
     The `callbacks` argument is an object containing one or more of:
@@ -2020,7 +2020,7 @@ Interceptor.attach(Module.getGlobalExportByName('read'), {
     Also be careful about intercepting calls to functions that are called a
     bazillion times per second; while **[send()](#communication-send)** is
     asynchronous, the total overhead of sending a single message is not optimized for
-    high frequencies, so that means Frida leaves it up to you to batch multiple values
+    high frequencies, so that means Ainakan leaves it up to you to batch multiple values
     into a single **[send()](#communication-send)**-call, based on whether low delay
     or high throughput is desired.
   </p>
@@ -2394,15 +2394,15 @@ Stalker.follow(mainThread.id, {
 <div class="note">
 <h5>Moved</h5>
 <p markdown="1">
-    As of Frida 17, this runtime bridge is no longer baked into Frida's GumJS
-    runtime, and can be fetched by running: `npm install frida-objc-bridge`.
+    As of Ainakan 17, this runtime bridge is no longer baked into Ainakan's GumJS
+    runtime, and can be fetched by running: `npm install ainakan-objc-bridge`.
     <br/>
 
     Import it into your agent like this:<br/>
-    `import ObjC from 'frida-objc-bridge';`<br/>
+    `import ObjC from 'ainakan-objc-bridge';`<br/>
 
-    For now this is not needed in scripts loaded by the Frida REPL, as well as
-    frida-trace.
+    For now this is not needed in scripts loaded by the Ainakan REPL, as well as
+    ainakan-trace.
 </p>
 </div>
 
@@ -2823,15 +2823,15 @@ function isAppModule(m) {
 <div class="note">
 <h5>Moved</h5>
 <p markdown="1">
-    As of Frida 17, this runtime bridge is no longer baked into Frida's GumJS
-    runtime, and can be fetched by running: `npm install frida-java-bridge`.
+    As of Ainakan 17, this runtime bridge is no longer baked into Ainakan's GumJS
+    runtime, and can be fetched by running: `npm install ainakan-java-bridge`.
     <br/>
 
     Import it into your agent like this:<br/>
-    `import Java from 'frida-java-bridge';`<br/>
+    `import Java from 'ainakan-java-bridge';`<br/>
 
-    For now this is not needed in scripts loaded by the Frida REPL, as well as
-    frida-trace.
+    For now this is not needed in scripts loaded by the Ainakan REPL, as well as
+    ainakan-trace.
 </p>
 </div>
 
@@ -3185,7 +3185,7 @@ const MyWeirdTrustManager = Java.registerClass({
         to [`Java.perform()`](#java-perform).
 
     -   `tempFileNaming`: object specifying naming convention to use for
-        temporary files. Defaults to `{ prefix: 'frida', suffix: 'dat' }`.
+        temporary files. Defaults to `{ prefix: 'ainakan', suffix: 'dat' }`.
 
     -   `use(className)`: like [`Java.use()`](#java-use) but for a specific class loader.
 
@@ -3216,8 +3216,8 @@ const MyWeirdTrustManager = Java.registerClass({
 +   `Instruction.parse(target)`: parse the instruction at the `target` address
     in memory, represented by a [`NativePointer`](#nativepointer).
     Note that on 32-bit ARM this address must have its least significant bit
-    set to 0 for ARM functions, and 1 for Thumb functions. Frida takes care
-    of this detail for you if you get the address from a Frida API (for
+    set to 0 for ARM functions, and 1 for Thumb functions. Ainakan takes care
+    of this detail for you if you get the address from a Ainakan API (for
     example [`Module#getExportByName()`](#module-getexportbyname)).
 
     The object returned has the fields:
@@ -3545,7 +3545,7 @@ const MyWeirdTrustManager = Java.registerClass({
 -   `skipOneNoLabel()`: skip the instruction that would have been written next,
     but without a label for internal use. This breaks relocation of branches to
     locations inside the relocated range, and is an optimization for use-cases
-    where all branches are rewritten (e.g. Frida's **[Stalker](#stalker)**).
+    where all branches are rewritten (e.g. Ainakan's **[Stalker](#stalker)**).
 
 -   `writeOne()`: write the next buffered instruction
     {: #x86relocator-writeone}
@@ -3553,7 +3553,7 @@ const MyWeirdTrustManager = Java.registerClass({
 -   `writeOneNoLabel()`: write the next buffered instruction, but without a
     label for internal use. This breaks relocation of branches to locations
     inside the relocated range, and is an optimization for use-cases where all
-    branches are rewritten (e.g. Frida's **[Stalker](#stalker)**).
+    branches are rewritten (e.g. Ainakan's **[Stalker](#stalker)**).
 
 -   `writeAll()`: write all buffered instructions
     {: #x86relocator-writeall}
@@ -4443,13 +4443,13 @@ const MyWeirdTrustManager = Java.registerClass({
 ### Console
 
 +   `console.log(line)`, `console.warn(line)`, `console.error(line)`:
-    write `line` to the console of your Frida-based application. The exact
-    behavior depends on where [frida-core](https://github.com/frida/frida-core)
+    write `line` to the console of your Ainakan-based application. The exact
+    behavior depends on where [ainakan-core](https://github.com/ainakan/ainakan-core)
     is integrated.
-    For example, this output goes to *stdout* or *stderr* when using Frida
-    through [frida-python](https://github.com/frida/frida-python),
+    For example, this output goes to *stdout* or *stderr* when using Ainakan
+    through [ainakan-python](https://github.com/ainakan/ainakan-python),
     **[qDebug](https://doc.qt.io/qt-5/qdebug.html)** when using
-    **[frida-qml](https://github.com/frida/frida-qml)**, etc.
+    **[ainakan-qml](https://github.com/ainakan/ainakan-qml)**, etc.
 
     Arguments that are **[ArrayBuffer](#arraybuffer)** objects will be substituted by
     the result of [`hexdump()`](#hexdump) with default options.
@@ -4497,7 +4497,7 @@ console.log(hexdump(libc, {
 ### Communication between host and injected process
 
 +   `recv([type, ]callback)`: request `callback` to be called on the next
-    message received from your Frida-based application. Optionally `type` may
+    message received from your Ainakan-based application. Optionally `type` may
     be specified to only receive a message where the `type` field is set to
     `type`.
     {: #communication-recv}
@@ -4510,7 +4510,7 @@ console.log(hexdump(libc, {
     to receive the next one.
 
 +   `send(message[, data])`: send the JavaScript object `message` to your
-    Frida-based application (it must be serializable to JSON). If you also have
+    Ainakan-based application (it must be serializable to JSON). If you also have
     some raw binary data that you'd like to send along with it, e.g. you dumped
     some memory using [`NativePointer#readByteArray`](#nativepointer-readbytearray),
     then you may pass this through the optional `data` argument. This requires it to
@@ -4522,7 +4522,7 @@ console.log(hexdump(libc, {
     <h5>Performance considerations</h5>
     <p>
         While <i>send()</i> is asynchronous, the total overhead of sending a single
-        message is not optimized for high frequencies, so that means Frida leaves
+        message is not optimized for high frequencies, so that means Ainakan leaves
         it up to you to batch multiple values into a single <i>send()</i>-call,
         based on whether low delay or high throughput is desired.
     </p>
@@ -4556,7 +4556,7 @@ rpc.exports = {
 >   like this:
 
 {% highlight js %}
-const frida = require('frida');
+const ainakan = require('ainakan');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -4566,7 +4566,7 @@ const readFile = util.promisify(fs.readFile);
 let session, script;
 async function run() {
   const source = await readFile(path.join(__dirname, '_agent.js'), 'utf8');
-  session = await frida.attach('iTunes');
+  session = await ainakan.attach('iTunes');
   script = await session.createScript(source);
   script.message.connect(onMessage);
   await script.load();
@@ -4593,7 +4593,7 @@ function onMessage(message, data) {
 
 {% highlight py %}
 import codecs
-import frida
+import ainakan
 
 def on_message(message, data):
     if message['type'] == 'send':
@@ -4601,7 +4601,7 @@ def on_message(message, data):
     elif message['type'] == 'error':
         print(message['stack'])
 
-session = frida.attach('iTunes')
+session = ainakan.attach('iTunes')
 with codecs.open('./agent.js', 'r', 'utf-8') as f:
     source = f.read()
 script = session.create_script(source)
@@ -4634,7 +4634,7 @@ If you want to be notified when the target process exits, use
 +   `clearInterval(id)`: cancel id returned by call to `setInterval`.
 
 +   `setImmediate(func[, ...parameters])`: schedules `func` to be called on
-    Frida's JavaScript thread as soon as possible, optionally passing it one
+    Ainakan's JavaScript thread as soon as possible, optionally passing it one
     or more `parameters`.
     Returns an id that can be passed to `clearImmediate` to cancel it.
 
@@ -4688,7 +4688,7 @@ Introspection APIs such as
 resources are skipped, and things appear as if you were not inside the process
 being instrumented.
 
-Any resources created by Frida's runtime will be cloaked automatically. This
+Any resources created by Ainakan's runtime will be cloaked automatically. This
 means you typically only need to manage cloaked resources if you use an
 OS-specific API to create a given resource.
 

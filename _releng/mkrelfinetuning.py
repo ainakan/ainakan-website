@@ -10,19 +10,19 @@ from mkrelnotes import extract_release_metadata
 
 def main():
     repo_root = Path(__file__).resolve().parent.parent
-    frida_repo = Path(sys.argv[1])
+    ainakan_repo = Path(sys.argv[1])
     posts_dir = repo_root / "_i18n" / "en" / "_posts"
     output_file = repo_root / "fine_tuning_data.jsonl"
-    generate_fine_tuning_data(frida_repo, posts_dir, output_file)
+    generate_fine_tuning_data(ainakan_repo, posts_dir, output_file)
 
 
-def generate_fine_tuning_data(frida_repo: Path, posts_dir: Path, output_file: Path):
+def generate_fine_tuning_data(ainakan_repo: Path, posts_dir: Path, output_file: Path):
     fine_tuning_data = []
 
     for file_path in posts_dir.glob("*-released.markdown"):
         print("\nProcessing", file_path)
         version = extract_version_from_markdown(file_path)
-        release_metadata = extract_release_metadata(frida_repo, version)
+        release_metadata = extract_release_metadata(ainakan_repo, version)
         markdown_content = file_path.read_text(encoding="utf-8")
 
         fine_tuning_data.append(
@@ -30,7 +30,7 @@ def generate_fine_tuning_data(frida_repo: Path, posts_dir: Path, output_file: Pa
                 "messages": [
                     {
                         "role": "system",
-                        "content": "You are an assistant that writes release notes for the Frida open source project.",
+                        "content": "You are an assistant that writes release notes for the Ainakan open source project.",
                     },
                     {
                         "role": "user",

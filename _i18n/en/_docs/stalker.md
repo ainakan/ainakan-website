@@ -1,6 +1,6 @@
 ## Introduction
 
-Stalker is Frida's code tracing engine. It allows threads to be followed,
+Stalker is Ainakan's code tracing engine. It allows threads to be followed,
 capturing every function, every block, even every instruction which is executed.
 A very good overview of the Stalker engine is provided
 [here](https://medium.com/@oleavr/anatomy-of-a-code-tracer-b081aadb0df8) and we
@@ -24,7 +24,7 @@ inherently expensive operation. Lastly, while this article will cover the key
 concepts of the implementation and will extract some critical parts of the
 implementation for a line-by-line analysis, there will be some last details of
 the implementation left for the reader to discover by reading the [source
-code](https://github.com/frida/frida-gum/blob/master/gum/backend-arm64/gumstalker-arm64.c).
+code](https://github.com/ainakan/ainakan-gum/blob/master/gum/backend-arm64/gumstalker-arm64.c).
 However, it is hoped it will prove to be a very useful head-start.
 
 ## Table of contents
@@ -76,9 +76,9 @@ However, it is hoped it will prove to be a very useful head-start.
 To start to understand the implementation of Stalker, we must first understand
 in detail what it offers to the user. Whilst Stalker can be invoked directly
 through its native Gum interface, most users will instead call it via the
-[JavaScript API](https://frida.re/docs/javascript-api/#stalker) which will call
+[JavaScript API](https://ainakan.re/docs/javascript-api/#stalker) which will call
 these Gum methods on their behalf. The [TypeScript type
-definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/frida-gum/index.d.ts)
+definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/ainakan-gum/index.d.ts)
 for Gum are well commented and provide a little more detail still.
 
 The main API to Stalker from JavaScript is:
@@ -93,7 +93,7 @@ Let's consider when these calls may be used. Stalking where you provide a thread
 ID is likely to be used where you have a thread of interest and are wondering
 what it is doing. Perhaps it has an interesting name? Thread names can be found
 using `cat /proc/PID/tasks/TID/comm`. Or perhaps you walked the threads in your
-process using the Frida JavaScript API `Process.enumerateThreads()` and then
+process using the Ainakan JavaScript API `Process.enumerateThreads()` and then
 used a NativeFunction to call:
 
 {% highlight c %}
@@ -102,12 +102,12 @@ int pthread_getname_np(pthread_t thread,
 {% endhighlight %}
 
 Using this along with the
-[Thread.backtrace()](https://frida.re/docs/javascript-api/#thread) to dump
+[Thread.backtrace()](https://ainakan.re/docs/javascript-api/#thread) to dump
 thread stacks can give you a really good overview of what a process is doing.
 
 The other scenario where you might call `Stalker.follow()` is perhaps from a
 function which has been
-[intercepted](https://frida.re/docs/javascript-api/#interceptor) or replaced. In
+[intercepted](https://ainakan.re/docs/javascript-api/#interceptor) or replaced. In
 this scenario, you have found a function of interest and you want to understand
 how it behaves, you want to see which functions or perhaps even code blocks the
 thread takes after a given function is called. Perhaps you want to compare the
@@ -278,7 +278,7 @@ So, how does `gum_process_modify_thread()` work? Well it depends on the
 platform. On Linux (and Android) it uses the `ptrace` API (the same one used by
 GDB) to attach to the thread and read and write registers. But there are a host
 of complexities. On Linux, you cannot ptrace your own process (or indeed any in
-the same process group), so Frida creates a clone of the current process in its
+the same process group), so Ainakan creates a clone of the current process in its
 own process group and shares the same memory space. It communicates with it
 using a UNIX socket. This cloned process acts as a debugger, reading the
 registers of the original target process and storing them in the shared memory
@@ -292,7 +292,7 @@ Both function carry out essentially the same job, although
 `_gum_stalker_do_follow_me()` is running on the target thread, but
 `gum_stalker_infect()` is not, so it must write some code to be called by the
 target thread using the
-[GumArm64Writer](https://github.com/frida/frida-gum/blob/master/gum/arch-arm64/gumarm64writer.c)
+[GumArm64Writer](https://github.com/ainakan/ainakan-gum/blob/master/gum/arch-arm64/gumarm64writer.c)
 rather than calling functions directly.
 
 We will cover these functions in more detail shortly, but first we need a little
@@ -334,7 +334,7 @@ If this instruction is copied to a different location in memory and executed,
 then because the address of the label is calculated by adding an offset to the
 current instruction pointer, then the value would be different. Fortunately, Gum
 has a
-[Relocator](https://github.com/frida/frida-gum/blob/master/gum/arch-arm64/gumarm64relocator.c)
+[Relocator](https://github.com/ainakan/ainakan-gum/blob/master/gum/arch-arm64/gumarm64relocator.c)
 for just this purpose which is capable of modifying the instruction given its
 new location so that the correct address is calculated.
 
@@ -436,7 +436,7 @@ Whilst a thread is running outside of Stalker, you may be familiar with using
 `Interceptor.attach()` to get a callback when a given function is called. When a
 thread is running in Stalker, however, these interceptors may not work. These
 interceptors work by patching the first few instructions (prologue) of the
-target function to re-direct execution into Frida. Frida copies and relocates
+target function to re-direct execution into Ainakan. Ainakan copies and relocates
 these first few instructions somewhere else so that after the `onEnter` callback
 has been completed, it can re-direct control flow back to the original function.
 
@@ -513,7 +513,7 @@ all calls to `libc`, but we can find the symbol for `malloc()` using
 ### Freeze/Thaw
 
 As an extension to DEP, some systems prevent pages from being marked writable
-and executable at the same time. Thus Frida must toggle the page permissions
+and executable at the same time. Thus Ainakan must toggle the page permissions
 between writable and executable to write instrumented code, and allow that code
 to execute respectively. When pages are executable, they are said to be frozen
 (as they cannot be changed) and when they are made writeable again, they are
@@ -589,7 +589,7 @@ detail later.
 Rather than using the default transformer, the user can instead provide a custom
 implementation which can replace and insert instructions at will. A good example
 is provided in the [API
-documentation](https://frida.re/docs/javascript-api/#stalker).
+documentation](https://ainakan.re/docs/javascript-api/#stalker).
 
 ### Callouts
 
@@ -620,7 +620,7 @@ struct _GumCalloutEntry
 ### EOB/EOI
 
 Recall that the
-[Relocator](https://github.com/frida/frida-gum/blob/master/gum/arch-arm64/gumarm64relocator.c)
+[Relocator](https://github.com/ainakan/ainakan-gum/blob/master/gum/arch-arm64/gumarm64relocator.c)
 is heavily involved in generating the instrumented code. It has two important
 properties which control its state.
 
@@ -2723,7 +2723,7 @@ of ROP chains which require return addresses to be stored in the stack. Since
 `LR'` is now stored in the stack instead of `LR`, valid return addresses cannot
 be forged without the key.
 
-Frida needs to take this into account also when generating code. When reading
+Ainakan needs to take this into account also when generating code. When reading
 pointers from registers used by the application (e.g. to determine the
 destination of an indirect branch or return), it is necessary to strip these
 pointer authentication codes from the address before it is used. This is

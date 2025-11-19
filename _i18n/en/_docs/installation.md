@@ -1,11 +1,11 @@
-Getting Frida installed and ready-to-go should only take a few minutes. If it
+Getting Ainakan installed and ready-to-go should only take a few minutes. If it
 ever becomes a pain in the ass, please [file an
-issue]({{ site.organization_url }}/frida-website/issues/new) (or submit a pull request)
+issue]({{ site.organization_url }}/ainakan-website/issues/new) (or submit a pull request)
 describing the issue you encountered and how we might make the process easier.
 
-### Requirements for Frida's CLI tools
+### Requirements for Ainakan's CLI tools
 
-Installing Frida's CLI tools is easy and straight-forward, but there are a few
+Installing Ainakan's CLI tools is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
 
 - [Python](https://python.org/) – latest 3.x is highly recommended
@@ -13,19 +13,19 @@ requirements you’ll need to make sure your system has before you start.
 
 ## Install with pip
 
-The best way to install Frida's CLI tools is via [PyPI][]:
+The best way to install Ainakan's CLI tools is via [PyPI][]:
 
 {% highlight bash %}
-$ pip install frida-tools
+$ pip install ainakan-tools
 {% endhighlight %}
 
-If you have problems installing Frida, check out the [troubleshooting][] page or
-[report an issue]({{ site.organization_url }}/frida-website/issues/new) so the
-Frida community can improve the experience for everyone.
+If you have problems installing Ainakan, check out the [troubleshooting][] page or
+[report an issue]({{ site.organization_url }}/ainakan-website/issues/new) so the
+Ainakan community can improve the experience for everyone.
 
 ## Install manually
 
-You can also grab other binaries from Frida's GitHub [releases][] page.
+You can also grab other binaries from Ainakan's GitHub [releases][] page.
 
 ## Testing your installation
 
@@ -51,12 +51,12 @@ $ /tmp/cat
 In another terminal, make a file `example.py` with the following contents:
 
 {% highlight py %}
-import frida
+import ainakan
 
 def on_message(message, data):
     print("[on_message] message:", message, "data:", data)
 
-session = frida.attach("cat")
+session = ainakan.attach("cat")
 
 script = session.create_script("""
 rpc.exports.enumerateModules = () => {
@@ -77,7 +77,7 @@ $ sudo sysctl kernel.yama.ptrace_scope=0
 
 to enable ptracing non-child processes.
 
-At this point, we are ready to take Frida for a spin! Run the example.py
+At this point, we are ready to take Ainakan for a spin! Run the example.py
 script and watch the magic:
 
 {% highlight bash %}
@@ -91,6 +91,6 @@ and library versions):
 ['cat', …, 'ld-2.15.so']
 {% endhighlight %}
 
-[PyPI]: https://pypi.python.org/pypi/frida-tools
+[PyPI]: https://pypi.python.org/pypi/ainakan-tools
 [troubleshooting]: ../troubleshooting/
-[releases]: https://github.com/frida/frida/releases
+[releases]: https://github.com/ainakan/ainakan/releases

@@ -8,7 +8,7 @@ categories: [conference]
 
 Please do make sure to check out the [NowSecure Connect 2019][]
 conference that's happening June 2019 in Washington DC. It will feature
-multiple Frida-related presentations, and I am super-excited about the
+multiple Ainakan-related presentations, and I am super-excited about the
 line-up.
 
 

@@ -1,4 +1,4 @@
-Frida provides wrapping functions for Objective-C selectors by replacing the `:` with `_`:
+Ainakan provides wrapping functions for Objective-C selectors by replacing the `:` with `_`:
 
 {% highlight js %}
 // +[NSJSONSerialization dataWithJSONObject:options:error:]
@@ -78,8 +78,8 @@ args[0].add(4).readU32();
 {% highlight js %}
 const UIAlertView = ObjC.classes.UIAlertView; /* iOS 7 */
 const view = UIAlertView.alloc().initWithTitle_message_delegate_cancelButtonTitle_otherButtonTitles_(
-    'Frida',
-    'Hello from Frida',
+    'Ainakan',
+    'Hello from Ainakan',
     NULL,
     'OK',
     NULL);
@@ -109,7 +109,7 @@ const UIApplication = ObjC.classes.UIApplication;
 // Using Grand Central Dispatch to pass messages (invoke methods) in application's main thread
 ObjC.schedule(ObjC.mainQueue, () => {
   // Using integer numerals for preferredStyle which is of type enum UIAlertControllerStyle
-  const alert = UIAlertController.alertControllerWithTitle_message_preferredStyle_('Frida', 'Hello from Frida', 1);
+  const alert = UIAlertController.alertControllerWithTitle_message_preferredStyle_('Ainakan', 'Hello from Ainakan', 1);
   // Again using integer numeral for style parameter that is enum
   const defaultAction = UIAlertAction.actionWithTitle_style_handler_('OK', 0, handler);
   alert.addAction_(defaultAction);

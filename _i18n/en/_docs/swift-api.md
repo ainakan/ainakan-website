@@ -1,6 +1,6 @@
 ## Getting Started
 
-Download the Swift release from https://github.com/frida/frida/releases.
+Download the Swift release from https://github.com/ainakan/ainakan/releases.
 
 See the C or JS API pages for similar documentation for now.
 
